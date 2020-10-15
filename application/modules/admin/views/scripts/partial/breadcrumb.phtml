@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="span12">
+    <ul class="breadcrumb">
+      <li>
+        <a href="<?php echo $this->url( array('module' => 'admin', 'controller' => 'index', 'action' => 'index') , NULL, true); ?>">Home</a> <span class="divider">&raquo;</span>
+      </li>
+    <?php foreach ($this->session as $item) { ?>
+      <li>
+        <a href="<?php echo $this->url( array('module' => 'admin', 'controller' => $item['controller'], 'action' => 'index', $this->params) , NULL, true); ?>"><?php echo $item['label']; ?></a> <span class="divider">&raquo;</span>
+      </li>
+    <?php } ?>
+      <li class="active"><?php echo $this->action; ?></li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<?php if ($this->pageCount): ?>
+<div class="row">
+	<div class="span12">
+		<div class="pagination pagination-centered">
+	        <ul>
+	        <?php if (isset($this->previous)): ?>
+				<li><a href="<?php echo $this->url(array('page' => $this->previous)); ?>" title="Anterior">&laquo;</a></li>
+	    	<?php else : ?>
+				<li class="disabled"><a href="javascript: void(0)" title="Anterior">&laquo;</a></li>
+			<?php endif; ?>
+			<?php foreach ($this->pagesInRange as $page): ?>
+				<?php if ($page != $this->current): ?>
+				<li><a href="<?php echo $this->url(array('page' => $page)); ?>" title="<?php echo $page; ?>"><?php echo $page; ?></a></li>
+				<?php else : ?>
+				<li class="active"><a href="javascript: void(0);" title="<?php echo $page; ?>"><?php echo $page; ?></a></li>
+				<?php endif; ?>
+			<?php endforeach; ?>
+	        <?php if (isset($this->next)): ?>
+				<li><a href="<?php echo $this->url(array('page' => $this->next)); ?>" title="Próxima">&raquo;</a></li>
+	    	<?php else : ?>
+				<li class="disabled"><a href="javascript: void(0)" title="Próxima">&raquo;</a></li>
+			<?php endif; ?>
+	        </ul>
+	    </div>
+	</div>
+</div>
+<?php endif; ?>
+

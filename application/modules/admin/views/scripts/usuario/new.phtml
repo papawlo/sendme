@@ -1,0 +1,72 @@
+<?php 
+$session = array(
+	array(
+		'controller' => $this->controller,
+		'label' => $this->pageTitle
+	)
+);
+?>
+
+<?php echo $this->partial('partial/pageheader.phtml', array('controller' => $this->pageTitle, 'action' => $this->pageTitleNew)); ?>
+<?php echo $this->partial('partial/breadcrumb.phtml', array('session' => $session, 'action' => $this->pageTitleNew)); ?>
+
+<div class="row">
+	<?php echo $this->partial('partial/sub-navigation.phtml'); ?>
+
+	<div class="span10">
+
+		<div class="row">
+			<div class="span10">
+				<form action="<?php echo $this->url( array('module' => 'admin', 'controller' => $this->controller, 'action' => 'new'), NULL, true ); ?>" method="post" class="form-horizontal well" enctype="multipart/form-data">
+				    <fieldset>
+				    <?php /* ?>
+				      <div class="control-group">
+				        <label class="control-label" for="role">Perfil</label>
+				        <div class="controls">
+				          <select id="role" name="role" class="{validate:{required:true, messages:{required:'Campo Obrigatório'}}}">
+				            <option value="">Selecione um tipo</option>
+				        <?php if ($this->userSession->role == 'admin') { ?>
+				        	<option value="admin">Admin</option>
+				        <?php } ?>
+				          </select>
+				        </div>
+				      </div>
+				    */ ?>
+				      <div class="control-group">
+				        <label class="control-label" for="nome">Nome</label>
+				        <div class="controls">
+				          <input type="text" class="input-xlarge {validate:{required:true, messages:{required:'Campo Obrigatório'}}}" id="nome" name="nome">
+				        </div>
+				      </div>
+				      <div class="control-group">
+				        <label class="control-label" for="email">E-mail</label>
+				        <div class="controls">
+				        	<div class="input-prepend">
+				        		<span class="add-on"><i class="icon-envelope"></i></span>
+				        		<input type="text" class="input-xlarge {validate:{required:true, email:true, messages:{required:'Campo Obrigatório', email:'Entre com um e-mail válido.'}}}" id="email" name="email" onChange="validateDadosAdmin($(this), 'email', this.value);">
+				        	</div>
+				        </div>
+				      </div>
+				    <?php /* ?>
+				      <div class="control-group">
+				        <label class="control-label" for="login">Login</label>
+				        <div class="controls">
+				          <input type="text" class="input-large {validate:{required:true, messages:{required:'Campo Obrigatório'}}}" id="login" name="login" onChange="validateDadosAdmin($(this), 'login', this.value);">
+				        </div>
+				      </div>
+				    */ ?>
+				      
+				      <div class="control-group">
+				        <label class="control-label" for="senha">Senha</label>
+				        <div class="controls">
+				          <input type="password" class="input-small" id="senha" name="senha">
+				        </div>
+				      </div>
+				      <?php echo $this->partial('partial/form_actions.phtml'); ?>
+				    </fieldset>
+				</form>
+			</div>
+		</div>
+
+	</div>
+</div>

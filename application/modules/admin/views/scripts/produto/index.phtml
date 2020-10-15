@@ -1,0 +1,94 @@
+<?php
+$session = array(
+    array(
+        'controller' => $this->controller,
+        'label' => $this->pageTitle
+    )
+);
+?>
+
+<?php echo $this->partial('partial/pageheader.phtml', array('controller' => $this->pageTitle, 'action' => $this->pageTitleList)); ?>
+<?php echo $this->partial('partial/breadcrumb.phtml', array('session' => $session, 'action' => $this->pageTitleList)); ?>
+
+<div class="row">
+    <?php echo $this->partial('partial/sub-navigation.phtml'); ?>
+
+    <div class="span10">
+        <?php if ($this->messages) { ?>
+            <?php if (isset($this->messages[0]['error'])) { ?>
+                <div class="row">
+                    <div class="span10">
+                        <div class="alert alert-error">
+                            <a class="close" data-dismiss="alert" href="#">&times;</a>
+                            <h4>Ocorreu um erro!!</h4>
+                            <p><?php echo $this->messages[0]['error']; ?></p>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+            <?php if (isset($this->messages[0]['sucesso'])) { ?>
+                <div class="row">
+                    <div class="span10">
+                        <div class="alert alert-success">
+                            <a class="close" data-dismiss="alert" href="#">&times;</a>
+                            <h4>Sucesso!</h4>
+                            <p><?php echo $this->messages[0]['sucesso']; ?></p>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+            <?php if (isset($this->messages[0]['info'])) { ?>
+                <div class="row">
+                    <div class="span10">
+                        <div class="alert alert-info">
+                            <a class="close" data-dismiss="alert" href="#">&times;</a>
+                            <h4>Atenção!</h4>
+                            <p><?php echo $this->messages[0]['info']; ?></p>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+        <?php } ?>
+        <div class="row">
+            <div class="span10">
+                <?php if (count($this->paginator)) { ?>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th width="30">Código</th>
+                                <th>Categoria</th>
+                                <th>Título</th>
+                                <th>Valor</th>
+                                <th width="120">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($this->paginator as $row) { ?>
+                                <tr>
+                                    <td><?php echo $row->id_produto; ?></td>
+                                    <td><?php echo $row->categoria; ?></td>
+                                    <td><?php echo $row->titulo; ?> </td>
+                                    <td><?php echo $row->valor; ?> </td>
+
+                                    <td>
+                                        <div class="btn-group">
+                                            <a href="<?php echo $this->url(array('module' => 'admin', 'controller' => $this->controller, 'action' => 'status', 'id' => $row->id_produto), NULL, true); ?>" class="btn bt-status" title="<?php echo ($row->status == 'ativo' ? 'Desativar' : 'Ativar'); ?>"><span class="icon-<?php echo ($row->status == 'ativo' ? 'ok' : 'ban'); ?>-circle"></span></a>
+                                            <a href="<?php echo $this->url(array('module' => 'admin', 'controller' => $this->controller, 'action' => 'edit', 'id' => $row->id_produto), NULL, true); ?>" class="btn bt-edit"><span class="icon-pencil"></span></a>
+                                            <a href="<?php echo $this->url(array('module' => 'admin', 'controller' => $this->controller, 'action' => 'delete', 'id' => $row->id_produto), NULL, true); ?>" class="btn bt-delete" data-toggle="modal"><span class="icon-trash"></span></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                <?php } else { ?>
+                    <div class="alert alert-info">
+                        <p>Nenhum registro encontrado.</p>
+                    </div>
+                <?php } ?>
+            </div>
+        </div>
+
+        <?php echo $this->paginationControl($this->paginator, 'Sliding', 'partial/pagination.phtml', $this->search_params); ?>           
+
+    </div>

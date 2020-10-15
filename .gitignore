@@ -1,0 +1,6 @@
+*.DS_Store
+public/assets/ckeditor/
+public/plupload/
+application/configs/
+.history/
+public/

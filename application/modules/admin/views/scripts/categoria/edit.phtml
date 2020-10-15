@@ -1,0 +1,52 @@
+<?php
+$session = array(
+    array(
+        'controller' => $this->controller,
+        'label' => $this->pageTitle
+    )
+);
+?>
+
+<?php echo $this->partial('partial/pageheader.phtml', array('controller' => $this->pageTitle, 'action' => $this->pageTitleEdit)); ?>
+<?php echo $this->partial('partial/breadcrumb.phtml', array('session' => $session, 'action' => $this->pageTitleEdit)); ?>
+
+<div class="row">
+    <?php echo $this->partial('partial/sub-navigation.phtml'); ?>
+
+    <div class="span10">
+
+        <div class="row">
+            <div class="span10">
+                <form action="<?php echo $this->url(array('module' => 'admin', 'controller' => $this->controller, 'action' => 'edit'), NULL, true); ?>" method="post" class="form-horizontal well" enctype="multipart/form-data">
+                    <input type="hidden" name="id" value="<?php echo $this->row->id_categoria; ?>">
+                    <fieldset>
+
+                        <div class="control-group">
+                            <label class="control-label" for="categoria">Categoria</label>
+                            <div class="controls">
+                                <input type="text" class="input-xlarge" id="categoria" name="categoria" value="<?php echo $this->row->categoria; ?>">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="parent_categoria">Categoria Pai</label>
+                            <div class="controls">
+                                <select id="parent_categoria" name="parent_categoria">
+                                    <option value="">Selecione uma categoria</option>
+                                    <?php
+                                    foreach ($this->categoriasPai as $chave => $categoria) :
+                                        ?>
+                                        <option value="<?php echo $chave ?>" <?php echo $this->row->parent_categoria == $chave ? 'selected="selected"' : "" ?>><?php echo $categoria; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                                
+                            </div>
+                        </div>
+
+                        <?php echo $this->partial('partial/form_actions.phtml'); ?>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

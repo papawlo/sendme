@@ -1,0 +1,13 @@
+<div class="span2">
+	<div class="well" style="padding: 8px 0;">
+	<?php 
+	echo $this->navigation()
+	        ->menu()
+	        ->setOnlyActiveBranch(true)
+	        ->setMinDepth(1)
+	        ->setMaxDepth(1)
+	        ->setRenderParents(false)
+	        ->setUlClass('nav nav-list');
+	?>
+	</div>
+</div>
