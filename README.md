@@ -1,4 +1,3 @@
-#Mande-me.
-##About
-An IFood like system to buy food and services
-# ZEND
+# Send-me.
+## About
+An food and services delivery system built on #ZEND framework
